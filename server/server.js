@@ -1,8 +1,5 @@
-'use strict';
-
 const Hapi = require('hapi');
-const config = require('./config/config');
-
+const config = require('./serverConfig');
 
 const server = new Hapi.Server();
 
@@ -15,20 +12,24 @@ server.start((err) => {
     console.log(`Server running at: ${server.info.uri}`);
 });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-        console.log('received a request: ', request.path);
-        reply('Hello, world!');
-    }
-});
+addRoutesToServer(server);
 
-server.route({
-    method: 'GET',
-    path: '/{name}',
-    handler: function (request, reply) {
-        console.log('received a request: ', request.path);
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
-    }
-});
+function addRoutesToServer(serverInstance) {
+    serverInstance.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
+            console.log('received a request: ', request.path);
+            reply('Hello, world!');
+        }
+    });
+
+    serverInstance.route({
+        method: 'GET',
+        path: '/{name}',
+        handler: function (request, reply) {
+            console.log('received a request: ', request.path);
+            reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+        }
+    });
+}
