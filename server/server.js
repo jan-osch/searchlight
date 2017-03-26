@@ -1,12 +1,12 @@
 'use strict';
 
 const Hapi = require('hapi');
+const config = require('./config/config');
+
 
 const server = new Hapi.Server();
 
-const PORT = process.env.PORT;
-
-server.connection({port: PORT, host: 'localhost'});
+server.connection({port: config.port, host: 'localhost'});
 
 server.start((err) => {
     if (err) {

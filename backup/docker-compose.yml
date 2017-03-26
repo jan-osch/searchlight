@@ -2,7 +2,7 @@ version: '2'
 
 services:
   app:
-    build: .
+    build: server
     image: app
     volumes: [".:/app/"]
     ports: ["80:3000"]
