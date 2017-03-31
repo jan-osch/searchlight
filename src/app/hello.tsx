@@ -9,7 +9,7 @@ interface IHelloState {
 
 class ApiHelper {
   static async getName(name: string): Promise<string> {
-    const response = await fetch(`:4000/${name}`, {
+    const response = await fetch(`api/${name}`, {
       method: 'GET',
     });
 
@@ -28,7 +28,7 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
   render() {
     return (
       <div>
-        <h1>Hello world! Witaj świecie</h1>
+        <h1>Hello world!</h1>
         <InputField trigger={this.performStuff}/>
         <p>{this.state.response}</p>
       </div>
@@ -70,7 +70,6 @@ class InputField extends React.Component<IInputFieldProps, IInputFieldState> {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
           <textarea value={this.state.value} onChange={this.handleChange}/>
         </label>
         <input type="submit" value="Submit"/>

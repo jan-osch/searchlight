@@ -26,7 +26,7 @@ function addRoutesToServer(serverInstance) {
 
   serverInstance.route({
     method: 'GET',
-    path: '/{name}',
+    path: '/api/{name}',
     handler: function (request, reply) {
       console.log('received a request: ', request.path);
       reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
