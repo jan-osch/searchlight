@@ -12,11 +12,14 @@
     },
     "production": {
       "presets": [
-        ["latest", {
-          "es2015": {
-            "modules": false
+        [
+          "latest",
+          {
+            "es2015": {
+              "modules": false
+            }
           }
-        }]
+        ]
       ],
       "plugins": [
         "transform-react-constant-elements",
