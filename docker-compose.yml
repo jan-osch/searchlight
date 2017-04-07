@@ -8,3 +8,8 @@ services:
     ports: ["80:3000"]
     environment:
       - PORT=3000
+
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200:9200"

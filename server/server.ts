@@ -1,5 +1,7 @@
-import * as Hapi from "hapi";
-import config from "./serverConfig";
+import * as Hapi from 'hapi';
+import config from './serverConfig';
+
+import QueryService from './queryService';
 
 const server = new Hapi.Server();
 
@@ -17,19 +19,18 @@ addRoutesToServer(server);
 function addRoutesToServer(serverInstance) {
   serverInstance.route({
     method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-      console.log('received a request: ', request.path);
-      reply('Hello, world!');
-    }
-  });
+    path: '/api/lines',
+    handler: async function (request, reply) {
+      const queryParams = request.query;
 
-  serverInstance.route({
-    method: 'GET',
-    path: '/api/{name}',
-    handler: function (request, reply) {
-      console.log('received a request: ', request.path);
-      reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+
+      const results = queryParams.full
+        ? await QueryService.search({text: queryParams.query, limit: 100, offset: 0})
+        : await QueryService.search({text: queryParams.query, limit: 5, offset: 0});
+
+      console.log(`performing search for: ${queryParams.query}, results: ${results.length}`);
+      reply(results);
     }
   });
 }
+
