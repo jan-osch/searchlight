@@ -1,7 +1,7 @@
 import * as React from 'react';
 
+import SearchBar from './searchBar';
 import ApiHelper from './api';
-import InputField from './inputField';
 import LineEntry from './lineEntry';
 import {Entry} from './interfaces';
 
@@ -26,17 +26,13 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
       <div>
         <div className='Menu'>
           <div className='Left'>
-            left
+            <a href='/about'>ABOUT</a>
           </div>
 
-          <InputField
+          <SearchBar
             onSmallChange={this.fetchEntries}
             onFullRequest={this.fetchRest}
           />
-
-          <div className='Right'>
-            right
-          </div>
         </div>
         <div>
           <ul>

@@ -9,7 +9,7 @@ interface IInputFieldState {
   value: string;
 }
 
-export default class InputField extends React.Component<IInputFieldProps, IInputFieldState> {
+export default class SearchBar extends React.Component<IInputFieldProps, IInputFieldState> {
   constructor(props: IInputFieldProps) {
     super(props);
     this.state = {
@@ -36,15 +36,16 @@ export default class InputField extends React.Component<IInputFieldProps, IInput
 
   render() {
     return (
-      <div className="SearchBar">
+      <div className='SearchBar'>
         <form onSubmit={this.handleSubmit}>
           <input type='text'
                  autoFocus={true}
                  value={this.state.value}
-                 placeholder='Search...'
+                 placeholder='Search for a movie line...'
                  onChange={this.handleChange}
           />
-          <button type='submit'><img src="resources/search_icon.png" width={20} height={20}/></button>
+          <button type='submit'>
+            <img src='resources/search_icon.png' width={18} height={18}/></button>
         </form>
       </div>
     );
