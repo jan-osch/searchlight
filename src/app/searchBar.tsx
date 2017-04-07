@@ -21,17 +21,13 @@ export default class SearchBar extends React.Component<IInputFieldProps, IInputF
     const inputText = event.target.value;
     this.setState({value: inputText});
 
-    if (inputText.length >= 1) {
-      this.props.onSmallChange(inputText);
-    }
+    this.props.onSmallChange(inputText);
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.value.length >= 1) {
-      this.props.onFullRequest(this.state.value);
-    }
+    this.props.onFullRequest(this.state.value);
   }
 
   render() {

@@ -26,14 +26,19 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
       <div>
         <div className='Menu'>
           <div className='Left'>
-            <a href='/about'>ABOUT</a>
+            <strong>Search</strong>light
           </div>
 
           <SearchBar
             onSmallChange={this.fetchEntries}
             onFullRequest={this.fetchRest}
           />
+
+          <div className='Right'>
+            <a href='/about'>ABOUT</a>
+          </div>
         </div>
+
         <div>
           <ul>
             {
@@ -46,13 +51,21 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
   }
 
   fetchEntries = async (query: string) => {
-    const entries = await ApiHelper.prefetch(query);
-    this.setState({entries});
+    if (query.length < 1) {
+      this.setState({entries: []});
+    } else {
+      const entries = await ApiHelper.prefetch(query);
+      this.setState({entries});
+    }
   }
 
   fetchRest = async (query: string) => {
-    const entries = await ApiHelper.getFullResult(query);
-    this.setState({entries});
+    if (query.length < 1) {
+      this.setState({entries: []});
+    } else {
+      const entries = await ApiHelper.getFullResult(query);
+      this.setState({entries});
+    }
   }
 }
 

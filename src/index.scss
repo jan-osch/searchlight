@@ -171,13 +171,14 @@ body, html {
   top: 0;
   left: 0;
 
-  .Left {
+  .Right {
     position: absolute;
-    left: 0;
-    margin-top: 16px;
-    margin-left: 30px;
+    right: 0;
+    top: 0;
+    margin-top: 37px;
+    margin-right: 60px;
 
-    a{
+    a {
       color: $oc-gray-6;
       padding-bottom: 3px;
       border-bottom: 1px solid transparent;
@@ -218,8 +219,11 @@ body, html {
     }
   }
 
-  .Right {
-    right: 0;
+  .Left {
+    position: absolute;
+    left: 0;
+    margin-top: 16px;
+    margin-left: 30px;
   }
 }
 
