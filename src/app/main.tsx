@@ -4,6 +4,7 @@ import SearchBar from './searchBar';
 import ApiHelper from './api';
 import LineEntry from './lineEntry';
 import {Entry} from './interfaces';
+import LogoForMenu from './components';
 
 interface IHelloProps {
 }
@@ -13,7 +14,7 @@ interface IHelloState {
 }
 
 
-export class Hello extends React.Component<IHelloProps, IHelloState> {
+export class Main extends React.Component<IHelloProps, IHelloState> {
   constructor(props: IHelloProps) {
     super(props);
     this.state = {
@@ -25,9 +26,7 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
     return (
       <div>
         <div className='Menu'>
-          <div className='Left'>
-            <strong>Search</strong>light
-          </div>
+          <LogoForMenu/>
 
           <SearchBar
             onSmallChange={this.fetchEntries}
@@ -52,20 +51,19 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
 
   fetchEntries = async (query: string) => {
     if (query.length < 1) {
-      this.setState({entries: []});
-    } else {
-      const entries = await ApiHelper.prefetch(query);
-      this.setState({entries});
+      return this.setState({entries: []});
     }
+    const entries = await ApiHelper.prefetch(query);
+    this.setState({entries});
   }
 
   fetchRest = async (query: string) => {
     if (query.length < 1) {
-      this.setState({entries: []});
-    } else {
-      const entries = await ApiHelper.getFullResult(query);
-      this.setState({entries});
+      return this.setState({entries: []});
     }
+
+    const entries = await ApiHelper.getFullResult(query);
+    this.setState({entries});
   }
 }
 

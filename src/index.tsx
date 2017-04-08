@@ -1,14 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Router, Route, browserHistory} from 'react-router';
+import {browserHistory, Route, Router} from 'react-router';
 
-import {Hello} from './app/hello';
+import {Main} from './app/main';
 
 import './index.scss';
+import AboutComponent from './app/about';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path='/' component={Hello}/>
+    <Route path='/' component={Main}/>
+    <Route path='/about' component={AboutComponent}/>
   </Router>,
   document.getElementById('root')
 );
