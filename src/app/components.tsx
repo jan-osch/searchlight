@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 
 const LogoForMenu = () => (
   <div className='Left'>
-    <a href="/"><strong>Search</strong>light</a>
+    <Link to='/'><strong>Search</strong>light</Link>
   </div>
 );
 

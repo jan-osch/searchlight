@@ -13,7 +13,7 @@ const AboutComponent = () => (
       </div>
     </div>
 
-    <div className="About">
+    <div className='About'>
       <p>Demo project made using following technolgies</p>
       <ul>
         <li>React</li>
@@ -23,6 +23,8 @@ const AboutComponent = () => (
         <li>Webpack</li>
         <li>Elasticsearch</li>
         <li>Babel</li>
+        <li>Bacon.js</li>
+        <li>React Router</li>
       </ul>
     </div>
   </div>

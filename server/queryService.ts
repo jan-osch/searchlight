@@ -17,7 +17,7 @@ export default class QueryService {
           size: params.limit,
           query: {
             query_string: {
-              query: `*${params.text}*`,
+              query: params.text,
               fields: ['text']
             }
           },

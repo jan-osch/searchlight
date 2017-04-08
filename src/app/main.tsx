@@ -1,7 +1,8 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 
 import SearchBar from './searchBar';
-import ApiHelper from './api';
+import EntryStore from './entryStore';
 import LineEntry from './lineEntry';
 import {Entry} from './interfaces';
 import LogoForMenu from './components';
@@ -20,6 +21,10 @@ export class Main extends React.Component<IHelloProps, IHelloState> {
     this.state = {
       entries: []
     };
+
+    EntryStore.entriesStream.onValue(entries => {
+      this.setState({entries});
+    });
   }
 
   render() {
@@ -28,13 +33,10 @@ export class Main extends React.Component<IHelloProps, IHelloState> {
         <div className='Menu'>
           <LogoForMenu/>
 
-          <SearchBar
-            onSmallChange={this.fetchEntries}
-            onFullRequest={this.fetchRest}
-          />
+          <SearchBar/>
 
           <div className='Right'>
-            <a href='/about'>ABOUT</a>
+            <Link to='/about'>ABOUT</Link>
           </div>
         </div>
 
@@ -47,23 +49,6 @@ export class Main extends React.Component<IHelloProps, IHelloState> {
         </div>
       </div>
     );
-  }
-
-  fetchEntries = async (query: string) => {
-    if (query.length < 1) {
-      return this.setState({entries: []});
-    }
-    const entries = await ApiHelper.prefetch(query);
-    this.setState({entries});
-  }
-
-  fetchRest = async (query: string) => {
-    if (query.length < 1) {
-      return this.setState({entries: []});
-    }
-
-    const entries = await ApiHelper.getFullResult(query);
-    this.setState({entries});
   }
 }
 

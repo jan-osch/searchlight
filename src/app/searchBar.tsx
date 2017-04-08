@@ -1,33 +1,36 @@
 import * as React from 'react';
 
-interface IInputFieldProps {
-  onSmallChange: (query: string) => any;
-  onFullRequest: (query: string) => any;
-}
+import EntryStore from './entryStore';
 
 interface IInputFieldState {
   value: string;
+  showSubmit: boolean;
 }
 
-export default class SearchBar extends React.Component<IInputFieldProps, IInputFieldState> {
-  constructor(props: IInputFieldProps) {
+export default class SearchBar extends React.Component<{}, IInputFieldState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      showSubmit: false,
     };
+
+    EntryStore.submitEnabledStream.onValue(v => {
+      this.setState(
+        {showSubmit: v}
+      );
+    });
   }
 
   handleChange = (event) => {
     const inputText = event.target.value;
     this.setState({value: inputText});
-
-    this.props.onSmallChange(inputText);
+    EntryStore.smallChangeBus.push(inputText);
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    this.props.onFullRequest(this.state.value);
+    EntryStore.submitBus.push(true);
   }
 
   render() {
@@ -40,8 +43,12 @@ export default class SearchBar extends React.Component<IInputFieldProps, IInputF
                  placeholder='Search for a movie line...'
                  onChange={this.handleChange}
           />
-          <button type='submit'>
-            <img src='resources/search_icon.png' width={18} height={18}/></button>
+          { this.state.showSubmit
+            ? <button type='submit'>
+              <img src='resources/search_icon.png' width={18} height={18}/>
+            </button>
+            : ''
+          }
         </form>
       </div>
     );
