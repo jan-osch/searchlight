@@ -83,6 +83,13 @@ module.exports = {
   },
   entry: {
     app: `./${conf.path.src('index')}`,
-    vendor: Object.keys(pkg.dependencies)
-  }
+    vendor: [
+      "axios",
+      "baconjs",
+      "lodash",
+      "react",
+      "react-dom",
+      "react-router",
+    ]
+  },
 };

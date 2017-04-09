@@ -13,8 +13,6 @@
       "react-router",
       "react",
       "react-dom",
-      "react-addons-test-utils",
-      "jasmine",
       "es6-shim"
     ]
   },
