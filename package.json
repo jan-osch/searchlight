@@ -88,8 +88,6 @@
     "build": "gulp",
     "serve": "API_PORT=4000 gulp serve",
     "serve:dist": "gulp serve:dist",
-    "test": "gulp test",
-    "test:auto": "gulp test:auto",
     "server": "cd server && PORT=4000 ELASTIC_HOST=localhost ELASTIC_PORT=9200 nodemon -e ts --exec \"ts-node server.ts\""
   },
   "eslintConfig": {
