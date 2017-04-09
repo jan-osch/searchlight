@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LogoForMenu from './components';
+import LogoForMenu from './common';
 
 const AboutComponent = () => (
   <div>

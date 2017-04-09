@@ -1,25 +1,34 @@
 import * as React from 'react';
 
-import EntryStore from './entryStore';
+import EntryStore from '../entryStore';
 
-interface IInputFieldState {
+interface ISearchBarState {
   value: string;
   showSubmit: boolean;
 }
 
-export default class SearchBar extends React.Component<{}, IInputFieldState> {
+export default class SearchBar extends React.Component<{}, ISearchBarState> {
+
+  private dispose: () => any;
+
   constructor(props: {}) {
     super(props);
     this.state = {
       value: '',
       showSubmit: false,
     };
+  }
 
-    EntryStore.submitEnabledStream.onValue(v => {
+  componentDidMount = () => {
+    this.dispose = EntryStore.submitEnabledStream.onValue(showSubmit => {
       this.setState(
-        {showSubmit: v}
+        {showSubmit}
       );
     });
+  }
+
+  componentWillUnmount = () => {
+    this.dispose();
   }
 
   handleChange = (event) => {
@@ -37,12 +46,14 @@ export default class SearchBar extends React.Component<{}, IInputFieldState> {
     return (
       <div className='SearchBar'>
         <form onSubmit={this.handleSubmit}>
+
           <input type='text'
                  autoFocus={true}
                  value={this.state.value}
                  placeholder='Search for a movie line...'
                  onChange={this.handleChange}
           />
+
           { this.state.showSubmit
             ? <button type='submit'>
               <img src='resources/search_icon.png' width={18} height={18}/>

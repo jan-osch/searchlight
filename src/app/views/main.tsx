@@ -2,29 +2,34 @@ import * as React from 'react';
 import {Link} from 'react-router';
 
 import SearchBar from './searchBar';
-import EntryStore from './entryStore';
+import EntryStore from '../entryStore';
 import LineEntry from './lineEntry';
-import {Entry} from './interfaces';
-import LogoForMenu from './components';
+import {IEntry} from '../interfaces';
+import LogoForMenu from './common';
 
-interface IHelloProps {
-}
-
-interface IHelloState {
-  entries: Array<Entry>;
+interface IMainState {
+  entries: Array<IEntry>;
 }
 
 
-export class Main extends React.Component<IHelloProps, IHelloState> {
-  constructor(props: IHelloProps) {
+export class Main extends React.Component<{}, IMainState> {
+  private dispose: () => any;
+
+  constructor(props: {}) {
     super(props);
     this.state = {
-      entries: []
+      entries: [],
     };
+  }
 
-    EntryStore.entriesStream.onValue(entries => {
+  componentDidMount = () => {
+    this.dispose = EntryStore.entriesStream.onValue(entries => {
       this.setState({entries});
     });
+  }
+
+  componentWillUnmount = () => {
+    this.dispose();
   }
 
   render() {

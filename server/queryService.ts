@@ -1,13 +1,13 @@
 import * as elasticsearch from 'elasticsearch';
 import * as _ from 'lodash';
 import config from './serverConfig';
-import {Entry} from '../src/app/interfaces';
+import {IEntry} from '../src/app/interfaces';
 
 const client = elasticsearch.Client({
   host: `${config.elastic.host}:${config.elastic.port}`
 });
 
-async function performSearch(params: { text: string, limit: number, offset: number }): Promise<Array<Entry>> {
+async function performSearch(params: { text: string, limit: number, offset: number }): Promise<Array<IEntry>> {
   const result = await client.search(
     {
       index: 'subs',
@@ -15,9 +15,11 @@ async function performSearch(params: { text: string, limit: number, offset: numb
         from: params.offset,
         size: params.limit,
         query: {
-          query_string: {
-            query: params.text,
-            fields: ['text']
+          match_phrase_prefix: {
+            text: {
+              query: params.text,
+              slop: 10,
+            }
           }
         },
       }
@@ -29,5 +31,5 @@ async function performSearch(params: { text: string, limit: number, offset: numb
 
 
 export default class QueryService {
-  static search: (params: { text: string, limit: number, offset: number }) => Promise<Array<Entry>> = _.memoize(performSearch);
+  static search: (params: { text: string, limit: number, offset: number }) => Promise<Array<IEntry>> = _.memoize(performSearch);
 }

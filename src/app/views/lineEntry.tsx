@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import {Entry} from './interfaces';
+import {IEntry} from '../interfaces';
 
-const LineEntry = (props: { entry: Entry }) => (
+
+const LineEntry = (props: { entry: IEntry }) => (
   <li className='Entry'>
     <p className='Text'>{props.entry.text}</p>
     <p className='Movie'><strong>{props.entry.movie}</strong> <span className='LeftSpan'>({props.entry.year})</span></p>

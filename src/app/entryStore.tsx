@@ -12,6 +12,7 @@ const submitEnabledStream = smallChangeBus
   .map(notEmpty);
 
 const previewEntriesStream = smallChangeBus
+  .debounce(100)
   .map((e: string) => e.trim())
   .flatMapLatest(
     query => query.length > 1

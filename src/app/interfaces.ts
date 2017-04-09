@@ -1,7 +1,7 @@
-export interface Entry {
-  text: string,
-  startTime: string,
-  endTime: string,
-  movie: string,
-  year: number,
+export interface IEntry {
+  text: string;
+  startTime: string;
+  endTime: string;
+  movie: string;
+  year: number;
 }
