@@ -1,21 +1,18 @@
-import {Entry} from './interfaces';
 import * as _ from 'lodash';
+import axios from 'axios';
+import {Entry} from './interfaces';
 
 class Api {
   static async performFetch(query: string): Promise<Array<Entry>> {
-    const response = await fetch(`api/lines?query=${query}`, {
-      method: 'GET',
-    });
+    const response = await axios.get(`api/lines?query=${query}`);
 
-    return response.json();
+    return response.data;
   }
 
   static async performGetFullResult(query: string): Promise<Array<Entry>> {
-    const response = await fetch(`api/lines?query=${query}&full=true`, {
-      method: 'GET',
-    });
+    const response = await axios.get(`api/lines?query=${query}&full=true`);
 
-    return response.json();
+    return response.data;
   }
 }
 

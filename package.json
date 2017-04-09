@@ -12,6 +12,8 @@
     "url": "https://github.com/jan-osch/searchlight/issues"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.62",
+    "axios": "^0.16.1",
     "baconjs": "^0.7.92",
     "bluebird": "^3.5.0",
     "elasticsearch": "^13.0.0-rc2",
@@ -22,11 +24,11 @@
     "react-router": "^3.0.2"
   },
   "devDependencies": {
-    "@types/baconjs": "^0.7.31",
+    "@types/axios": "^0.14.0",
     "@types/es6-shim": "^0.31.32",
     "@types/hapi": "^16.0.0",
     "@types/jasmine": "^2.5.43",
-    "@types/lodash": "^4.14.61",
+    "@types/lodash": "4.14.51",
     "@types/node": "^7.0.5",
     "@types/react": "^15.0.11",
     "@types/react-addons-test-utils": "^0.14.17",

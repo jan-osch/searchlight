@@ -12,7 +12,7 @@ const submitEnabledStream = smallChangeBus
   .map(notEmpty);
 
 const previewEntriesStream = smallChangeBus
-  .map(e => e.trim())
+  .map((e: string) => e.trim())
   .flatMapLatest(
     query => query.length > 1
       ? Bacon.fromPromise(ApiHelper.prefetch(query))
@@ -28,7 +28,7 @@ const triggerFullFromSubmitPressedStream = Bacon
 
 const fullEntriesStream = triggerFullFromSubmitPressedStream
   .merge(triggerFullFromTimeoutStream)
-  .map(e => e.trim())
+  .map((e: string) => e.trim())
   .filter(notEmpty)
   .skipDuplicates()
   .flatMapLatest(

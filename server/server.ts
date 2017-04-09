@@ -21,15 +21,23 @@ function addRoutesToServer(serverInstance) {
     method: 'GET',
     path: '/api/lines',
     handler: async function (request, reply) {
-      const queryParams = request.query;
+      try {
+        const queryParams = request.query;
 
+        const startTime = new Date().getTime();
 
-      const results = queryParams.full
-        ? await QueryService.search({text: queryParams.query, limit: 100, offset: 0})
-        : await QueryService.search({text: queryParams.query, limit: 5, offset: 0});
+        const results = queryParams.full
+          ? await QueryService.search({text: queryParams.query, limit: 100, offset: 0})
+          : await QueryService.search({text: queryParams.query, limit: 5, offset: 0});
 
-      console.log(`performing search for: ${queryParams.query}, results: ${results.length}`);
-      reply(results);
+        const duration = new Date().getTime() - startTime;
+        console.log(`performing search for: ${queryParams.query}, results: ${results.length} duration: ${duration}`);
+        reply(results);
+
+      } catch (e) {
+        console.error(e);
+        reply.code(500);
+      }
     }
   });
 }
