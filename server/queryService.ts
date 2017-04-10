@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import config from './serverConfig';
 import {IEntry} from '../src/app/interfaces';
 
-const client = elasticsearch.Client({
+const client = new elasticsearch.Client({
   host: `${config.elastic.host}:${config.elastic.port}`
 });
 
@@ -26,7 +26,7 @@ async function performSearch(params: { text: string, limit: number, offset: numb
     }
   );
 
-  return result.hits.hits.map(e => e._source);
+  return result.hits.hits.map(e => e._source) as any;
 }
 
 

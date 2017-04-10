@@ -11,14 +11,12 @@ const hub = new HubRegistry([conf.path.tasks('*.js')]);
 gulp.registry(hub);
 
 gulp.task('build', gulp.series(gulp.parallel('other', 'webpack:dist')));
-gulp.task('test', gulp.series('karma:single-run'));
-gulp.task('test:auto', gulp.series('karma:auto-run'));
 gulp.task('serve', gulp.series('webpack:watch', 'watch', 'browsersync'));
+gulp.task('server:build', gulp.series('server:copy', 'server:compile'));
 gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
 gulp.task('default', gulp.series('clean', 'build'));
 gulp.task('watch', watch);
-
-
+gulp.task('deploy:prepare', gulp.series('clean', gulp.parallel('build', 'server:build')));
 
 function reloadBrowserSync(cb) {
   browserSync.reload();

@@ -1,11 +1,27 @@
 import * as Hapi from 'hapi';
-import config from './serverConfig';
+import * as Inert from 'inert';
+import * as path from 'path';
 
+import config from './serverConfig';
 import QueryService from './queryService';
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+  connections: {
+    routes: {
+      files: {
+        relativeTo: path.join(__dirname, '..', 'dist')
+      }
+    }
+  }
+});
 
 server.connection({port: config.port, host: 'localhost'});
+
+if (config.serveStaticFiles) {
+  console.log('Server will serve static files');
+  server.register(Inert, () => {
+  });
+}
 
 server.start((err) => {
   if (err) {
@@ -14,9 +30,9 @@ server.start((err) => {
   console.log(`Server running at: ${server.info.uri}`);
 });
 
-addRoutesToServer(server);
+addRoutesToServer(server, config.serveStaticFiles);
 
-function addRoutesToServer(serverInstance) {
+function addRoutesToServer(serverInstance, serveStatic: boolean) {
   serverInstance.route({
     method: 'GET',
     path: '/api/lines',
@@ -40,5 +56,19 @@ function addRoutesToServer(serverInstance) {
       }
     }
   });
+
+  if (serveStatic) {
+    serverInstance.route({
+      method: 'GET',
+      path: '/{param*}',
+      handler: {
+        directory: {
+          path: '.',
+          redirectToSlash: true,
+          index: true
+        }
+      }
+    });
+  }
 }
 
