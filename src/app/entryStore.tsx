@@ -39,7 +39,7 @@ const fullEntriesStream = triggerFullFromSubmitPressedStream
   );
 
 const entriesStream = fullEntriesStream
-  .merge(previewEntriesStream);
+  .merge(previewEntriesStream as any);
 
 export default {
   smallChangeBus,

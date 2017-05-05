@@ -1,16 +1,21 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {browserHistory, Route, Router} from 'react-router';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 
-import {Main} from './app/views/main';
-import AboutComponent from './app/views/about';
+import './resources/index.scss'
 
-import './index.scss';
+import {Main} from './app/views/main'
+import AboutComponent from './app/views/about'
+import {ROUTES} from './app/routes'
+
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path='/' component={Main}/>
-    <Route path='/about' component={AboutComponent}/>
+  <Router>
+    <Switch>
+      <Route exact path={ROUTES.MAIN} component={Main as any}/>
+
+      <Route path={ROUTES.ABOUT} component={AboutComponent}/>
+    </Switch>
   </Router>,
   document.getElementById('root')
-);
+)

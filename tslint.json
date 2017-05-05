@@ -76,7 +76,11 @@
       "single"
     ],
     "radix": true,
-    "semicolon": true,
+    "semicolon": [
+      false,
+      "always",
+      "ignore-bound-class-methods"
+    ],
     "triple-equals": [
       true,
       "allow-null-check"
