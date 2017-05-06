@@ -5,11 +5,13 @@ import * as path from 'path'
 import config from './serverConfig'
 import QueryService from './queryService'
 
+const staticFilesLocation = path.join(__dirname, '..', config.staticFilesLocation)
+
 const server = new Hapi.Server({
   connections: {
     routes: {
       files: {
-        relativeTo: path.join(__dirname, '..', config.staticFilesLocation)
+        relativeTo: staticFilesLocation
       }
     }
   }
@@ -18,6 +20,7 @@ const server = new Hapi.Server({
 server.connection({port: config.port, host: 'localhost'})
 
 if (config.serveStaticFiles) {
+  console.log(`Server will be serving static files from: ${staticFilesLocation}`)
   server.register(Inert, () => console.log(`Inert started serving files from : ${config.staticFilesLocation}`))
 }
 
