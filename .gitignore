@@ -1,5 +1,5 @@
 .tmp/
 coverage/
-dist/
-dist_server
+c_build/
+s_build/
 node_modules/

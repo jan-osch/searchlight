@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "target": "ES2017",
+    "lib": [
+      "DOM",
+      "ES2015"
+    ],
+    "outDir": "s_build"
+  },
+  "include": [
+    "server/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src"
+  ]
+}

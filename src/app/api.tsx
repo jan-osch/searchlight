@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import axios from 'axios';
-import {IEntry} from './interfaces';
+import {IEntry} from '../../server/interfaces';
 
 class Api {
   static async performFetch(query: string): Promise<Array<IEntry>> {

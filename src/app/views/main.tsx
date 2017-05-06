@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import SearchBar from './searchBar'
 import EntryStore from '../entryStore'
 import LineEntry from './lineEntry'
-import {IEntry} from '../interfaces'
+import {IEntry} from '../../../server/interfaces'
 import LogoForMenu from './common'
 import {ROUTES} from '../routes'
 

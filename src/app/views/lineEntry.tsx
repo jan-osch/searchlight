@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {IEntry} from '../interfaces';
+import {IEntry} from '../../../server/interfaces';
 
 
 const LineEntry = (props: { entry: IEntry }) => (
