@@ -17,7 +17,7 @@ const server = new Hapi.Server({
   }
 })
 
-server.connection({port: config.port, host: 'localhost'})
+server.connection({port: config.port})
 
 if (config.serveStaticFiles) {
   console.log(`Server will be serving static files from: ${staticFilesLocation}`)
