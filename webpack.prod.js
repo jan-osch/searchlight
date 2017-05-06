@@ -7,12 +7,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.tsx$/,
-        exclude: /node_modules/,
-        loader: 'tslint-loader',
-        enforce: 'pre'
-      },
-      {
         test: /\.(css|scss)$/,
         loaders: [
           'style-loader',

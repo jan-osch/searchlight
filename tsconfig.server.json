@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "removeComments": false,
-    "target": "ES2017",
+    "target": "ES2015",
     "lib": [
       "DOM",
       "ES2015"
     ],
-    "outDir": "s_build"
+    "outDir": "s_build",
+    "module": "CommonJS"
   },
   "include": [
     "server/**/*.ts"
