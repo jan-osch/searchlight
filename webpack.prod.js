@@ -38,7 +38,8 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: 'src/resources/index.html'
+      template: 'src/resources/index.html',
+      favicon: 'src/resources/logo_56.png',
     }),
 
     new webpack.LoaderOptionsPlugin({
