@@ -19,11 +19,11 @@ async function performSearch(params: { text: string, limit: number, offset: numb
             text: {
               query: params.text,
               slop: 10,
-            }
-          }
+            },
+          },
         },
-      }
-    }
+      },
+    },
   )
 
   return result.hits.hits.map(e => e._source) as any
